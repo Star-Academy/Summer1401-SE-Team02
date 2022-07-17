@@ -28,6 +28,7 @@ class SearchEngine{
      private static void addWord(String word, String docID){
           if (!indexedData.containsKey(word)) {
                ArrayList<String> docs = new ArrayList<String>();
+               docs.add(docID);
                indexedData.put(word, docs);
           }
           else {
