@@ -31,9 +31,12 @@ class SearchEngine{
                ArrayList<String> docs = new ArrayList<String>();
                indexedData.put(word, docs);
           }
+          else {
+               insertDocID(word, indexedData.get(word), docID);
+          }
      }
 
-     private static void insertDocID(String word, ArrayList<String> docsIDs, String DocID){
+     private static void insertDocID(String word, ArrayList<String> docsIDs, String docID){
           //TODO: insert the docID to the list and replace it in indexedData.
      }
 }
