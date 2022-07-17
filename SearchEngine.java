@@ -10,8 +10,8 @@ class SearchEngine{
           docNames = new HashMap<>();
      }
 
-     public static ArrayList<Integer> search(String word){
-          return indexedData.get(word);
+     public static ArrayList<String> search(String word){
+          return getDocNames(indexedData.get(word));
      }
 
      public static void addFile(String text, String docID){
@@ -49,5 +49,13 @@ class SearchEngine{
                docsIDs.add(docID);
                indexedData.put(word, docsIDs);
           }
+     }
+
+     private static ArrayList<String> getDocNames(ArrayList<Integer> docIndexes){
+          ArrayList<String> result = new ArrayList<>();
+          for (int index : docIndexes){
+               result.add(docNames.get(index));
+          }
+          return result;
      }
 }
