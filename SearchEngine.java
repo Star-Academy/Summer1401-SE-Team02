@@ -2,18 +2,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class SearchEngine{
-     private static HashMap<String, ArrayList> indexedData;
-     
+     private static HashMap<String, ArrayList<String> > indexedData;
+
      static {
           indexedData = new HashMap<>();
      }
 
      public static ArrayList<String> search(String word){
-          return null;
+          return indexedData.get(word);
      }
 
      public static void addFile(String text, String docID){
-          //TODO tokenize the text and add each word to our indexed database
+          ArrayList<String> words = tokenize(text);
+          for (String word : words) addWord(word, docID);
      }
 
      private static ArrayList<String> tokenize(String text){
