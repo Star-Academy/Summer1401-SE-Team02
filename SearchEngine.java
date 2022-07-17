@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class SearchEngine{
-     private static HashMap<String, ArrayList> indexedData;
+     private static HashMap<String, ArrayList<String> > indexedData;
 
      static {
           indexedData = new HashMap<>();
      }
 
      public static ArrayList<String> search(String word){
-          return null;
+          return indexedData.get(word);
      }
 
      public static void addFile(String text, String docID){
@@ -19,6 +19,7 @@ class SearchEngine{
 
      private static ArrayList<String> tokenize(String text){
           //TODO: tokenize the text and seperate it to words. (most simple way)
+          
           return null;
      }
 
