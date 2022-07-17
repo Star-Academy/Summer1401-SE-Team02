@@ -21,7 +21,7 @@ public class Main {
      }
 
      private static void loadFiles() throws Exception{
-          File directory = new File("Summer1401-SE-Team02/Docs");
+          File directory = new File("Docs");
           for (File file : directory.listFiles()) {
                loadFile(file);
           }    
