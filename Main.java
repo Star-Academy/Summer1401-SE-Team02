@@ -15,8 +15,9 @@ public class Main {
           }
 
           Scanner scanner = new Scanner(System.in);
-          for (int i = 0; i < 5; i++) {
-               System.out.println(SearchEngine.search(scanner.nextLine()));
+          String word;
+          while ((word = scanner.nextLine()).equals("-1")){
+               System.out.println(SearchEngine.search(word));
           }
      }
 
