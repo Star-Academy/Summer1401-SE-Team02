@@ -18,7 +18,11 @@ class SearchEngine{
 
      private static ArrayList<String> tokenize(String text){
           //TODO: tokenize the text and seperate it to words. (most simple way)
-          return null;
+          ArrayList<String> tokenized = new ArrayList<String>();
+          for (String token : text.split("\s+")) {
+               tokenized.add(token);
+          }
+          return tokenized;
      }
 
      private static void addWord(String word, String docID){
