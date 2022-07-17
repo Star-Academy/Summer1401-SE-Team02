@@ -37,6 +37,7 @@ class SearchEngine{
      }
 
      private static void insertDocID(String word, ArrayList<String> docsIDs, String docID){
-          //TODO: insert the docID to the list and replace it in indexedData.
+          docsIDs.add(docID);
+          indexedData.put(word, docsIDs);
      }
 }
