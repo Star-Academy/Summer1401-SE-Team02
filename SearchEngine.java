@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 class SearchEngine{
      private static HashMap<String, ArrayList<Integer> > indexedData;
-     private static HashMap<Integer, String> docNames;
+     public static HashMap<Integer, String> docNames;
 
      static{
           indexedData = new HashMap<>();
@@ -16,8 +16,9 @@ class SearchEngine{
 
      public static void addFile(String text, String docID){
           ArrayList<String> words = tokenize(refine(text));
-          docNames.put(docNames.size(), docID);
-          for (String word : words) addWord(word, docNames.size());
+          int id = docNames.size();
+          docNames.put(id, docID);
+          for (String word : words) addWord(word, id);
      }
 
      private static ArrayList<String> tokenize(String text){
@@ -29,7 +30,7 @@ class SearchEngine{
      }
 
      private static String refine(String text){
-          return text.replaceAll("[^a-zA-Z ]", "");
+          return text.replaceAll("[^a-zA-Z ]", "").toUpperCase();
      }
 
      private static void addWord(String word, int docID){

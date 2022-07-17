@@ -1,8 +1,7 @@
 import java.io.File;
-
 import java.util.Scanner;
 
-public class Main {
+public class Main {      
      public static void main(String[] args) {
           runProgram();
      }
@@ -11,13 +10,13 @@ public class Main {
           loadData();
           getQueries();
      }
-
+     
      
      private static void getQueries(){
           Scanner scanner = new Scanner(System.in);
           String word;
           while (!(word = scanner.nextLine()).equals("-1")){
-               System.out.println(SearchEngine.search(word));
+               System.out.println(SearchEngine.search(word.toUpperCase()));
           }
      }
      private static void loadData(){
