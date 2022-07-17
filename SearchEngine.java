@@ -20,15 +20,17 @@ class SearchEngine{
      private static ArrayList<String> tokenize(String text){
           //TODO: tokenize the text and seperate it to words. (most simple way)
           ArrayList<String> tokenized = new ArrayList<String>();
-          for (String token : text.split("\s+")) {
+          for (String token : text.split("\\s+")) {
                tokenized.add(token);
           }
           return tokenized;
      }
 
      private static void addWord(String word, String docID){
-          //TODO: check whether the word is new or not. if its new, simply add it to the indexedData, else, insert the docID to the list.
-          
+          if (!indexedData.containsKey(word)) {
+               ArrayList<String> docs = new ArrayList<String>();
+               indexedData.put(word, docs);
+          }
      }
 
      private static void insertDocID(String word, ArrayList<String> docsIDs, String DocID){
