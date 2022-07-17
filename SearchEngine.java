@@ -13,7 +13,7 @@ class SearchEngine{
      }
 
      public static void addFile(String text, String docID){
-          ArrayList<String> words = tokenize(text);
+          ArrayList<String> words = tokenize(refine(text));
           for (String word : words) addWord(word, docID);
      }
 
@@ -23,6 +23,10 @@ class SearchEngine{
                tokenized.add(token);
           }
           return tokenized;
+     }
+
+     private static String refine(String text){
+          return text;
      }
 
      private static void addWord(String word, String docID){
