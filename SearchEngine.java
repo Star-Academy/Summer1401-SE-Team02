@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 class SearchEngine{
      private static HashMap<String, ArrayList> indexedData;
-     
+
      static {
           indexedData = new HashMap<>();
      }
@@ -13,7 +13,8 @@ class SearchEngine{
      }
 
      public static void addFile(String text, String docID){
-          //TODO tokenize the text and add each word to our indexed database
+          ArrayList<String> words = tokenize(text);
+          for (String word : words) addWord(word, docID);
      }
 
      private static ArrayList<String> tokenize(String text){
