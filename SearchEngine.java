@@ -26,10 +26,16 @@ class SearchEngine{
      }
 
      private static void addWord(String word, String docID){
-          //TODO: check whether the word is new or not. if its new, simply add it to the indexedData, else, insert the docID to the list.
+          if (!indexedData.containsKey(word)) {
+               ArrayList<String> docs = new ArrayList<String>();
+               indexedData.put(word, docs);
+          }
+          else {
+               insertDocID(word, indexedData.get(word), docID);
+          }
      }
 
-     private static void insertDocID(String word, ArrayList<String> docsIDs, String DocID){
+     private static void insertDocID(String word, ArrayList<String> docsIDs, String docID){
           //TODO: insert the docID to the list and replace it in indexedData.
      }
 }
