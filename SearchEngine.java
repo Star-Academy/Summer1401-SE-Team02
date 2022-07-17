@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 class SearchEngine{
      private static HashMap<String, ArrayList> indexedData;
+     
      static {
           indexedData = new HashMap<>();
      }
