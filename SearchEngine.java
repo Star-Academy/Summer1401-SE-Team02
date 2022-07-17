@@ -52,6 +52,7 @@ class SearchEngine{
      }
 
      private static ArrayList<String> getDocNames(ArrayList<Integer> docIndexes){
+          if (docIndexes == null) return null;
           ArrayList<String> result = new ArrayList<>();
           for (int index : docIndexes){
                result.add(docNames.get(index));
