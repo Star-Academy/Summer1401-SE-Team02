@@ -41,8 +41,6 @@ public class Main {
           while(scanner.hasNextLine()){
                text.append(scanner.nextLine() + " ");
           }
-          System.out.println(file.getName() + " :: ");
-          System.out.println(text + "\n");
           SearchEngine.addFile(text.toString(), file.getName());
           scanner.close();
      }
