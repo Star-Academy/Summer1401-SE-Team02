@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 class SearchEngine{
      private static HashMap<String, ArrayList<String> > indexedData;
-
-     static {
+     
+     static{
           indexedData = new HashMap<>();
      }
 
@@ -18,7 +18,6 @@ class SearchEngine{
      }
 
      private static ArrayList<String> tokenize(String text){
-          //TODO: tokenize the text and seperate it to words. (most simple way)
           ArrayList<String> tokenized = new ArrayList<String>();
           for (String token : text.split("\\s+")) {
                tokenized.add(token);
