@@ -61,15 +61,26 @@ class SearchEngine{
      }
 
      private static ArrayList<Integer> intersection(ArrayList<Integer> a, ArrayList<Integer> b){
-          // TODO: you can also use 'retainAll' and 'addAll' methods from Collection library
-          // link: https://stackoverflow.com/questions/5283047/intersection-and-union-of-arraylists-in-java
-          return null;
+          ArrayList<Integer> result = (ArrayList<Integer>) a.clone();
+          result.retainAll(b);
+          return result;
      }
      private static ArrayList<Integer> union(ArrayList<Integer> a, ArrayList<Integer> b){
-          return null;
+          ArrayList<Integer> result = new ArrayList<Integer>();
+          result.addAll(a);
+          result.addAll(b);
+          for (Integer e : intersection(a, b)) {
+              result.remove(e);
+          }
+          return result;
      }
      private static ArrayList<Integer> subtract(ArrayList<Integer> a, ArrayList<Integer> b){
-          return null;
+          ArrayList<Integer> result = new ArrayList<Integer>();
+          result.addAll(a);
+          for (Integer e : intersection(a, b)) {
+              result.remove(e);
+          }
+          return result;
      }
      
          
