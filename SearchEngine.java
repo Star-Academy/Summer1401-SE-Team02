@@ -10,8 +10,35 @@ class SearchEngine{
           docNames = new HashMap<>();
      }
 
-     public static ArrayList<String> search(String word){
-          return getDocNames(indexedData.get(word));
+     public static ArrayList<String> search(String query){
+          return getDocNames(processQuery(query.split("\\s+")));
+     }
+
+     private static ArrayList<Integer> getDocsList(String word){
+          if (indexedData.containsKey(word.toUpperCase())) return indexedData.get(word);
+          return new ArrayList<Integer>();
+     }
+
+     private static ArrayList<Integer> processQuery(String[] queryParts){
+          ArrayList<Integer> result = new ArrayList<>();
+          ArrayList<Integer> result_plus = new ArrayList<>();
+          boolean[] flags = {false, false};
+          for (String query : queryParts){
+               if (query.startsWith("+")) {
+                    flags[0] = true;
+                    result_plus = union(result_plus, getDocsList(query.substring(1)));
+               }
+               else if (query.startsWith("-")) result = subtract(result, getDocsList(query.substring(1)));
+               else{
+                    flags[1] = true;
+                    if (result.isEmpty()) result = getDocsList(query);
+                    else result = intersection(result, getDocsList(query));
+               }
+               
+          }
+          if (flags[0]){
+               return (flags[1]) ? intersection(result, result_plus) : result_plus;
+          }else return result;
      }
 
      public static void addFile(String text, String docID){

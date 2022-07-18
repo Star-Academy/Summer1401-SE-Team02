@@ -11,15 +11,16 @@ public class Main {
           getQueries();
      }
      
-     
      private static void getQueries(){
           Scanner scanner = new Scanner(System.in);
-          String word;
-          while (!(word = scanner.nextLine()).equals("-1")){
-               System.out.println(SearchEngine.search(word.toUpperCase()));
+          String command;
+          while (!(command = scanner.nextLine()).equals("-1")){
+               System.out.println(SearchEngine.search(command.toUpperCase()));
           }
           scanner.close();
      }
+     
+     
      private static void loadData(){
           try {
                loadFiles();               
