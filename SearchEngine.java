@@ -59,4 +59,18 @@ class SearchEngine{
           }
           return result;
      }
+
+     private static ArrayList<Integer> intersection(ArrayList<Integer> a, ArrayList<Integer> b){
+          // TODO: you can also use 'retainAll' and 'addAll' methods from Collection library
+          // link: https://stackoverflow.com/questions/5283047/intersection-and-union-of-arraylists-in-java
+          return null;
+     }
+     private static ArrayList<Integer> union(ArrayList<Integer> a, ArrayList<Integer> b){
+          return null;
+     }
+     private static ArrayList<Integer> subtract(ArrayList<Integer> a, ArrayList<Integer> b){
+          return null;
+     }
+     
+         
 }
