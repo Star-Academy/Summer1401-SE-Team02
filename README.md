@@ -8,8 +8,12 @@ implementing the basic structure of the search engine with limited capabilities.
 
 ## Phase 2
 attempting to improve the search quality + some advancements in time efficiency
-- [ ] index documents considering the order
-- [x] removing noises from the texts
+- [x] removing noises from the texts (non alphabets)
+- [x] create new branch
+- [ ] remove stopping words
+- [ ] AND: intersection method
+- [ ] OR: Union method
+- [ ] Subtraction method
 
 
 ## Bugs to fix

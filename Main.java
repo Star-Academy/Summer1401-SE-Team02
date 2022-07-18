@@ -18,6 +18,7 @@ public class Main {
           while (!(word = scanner.nextLine()).equals("-1")){
                System.out.println(SearchEngine.search(word.toUpperCase()));
           }
+          scanner.close();
      }
      private static void loadData(){
           try {
