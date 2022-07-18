@@ -10,7 +10,7 @@ implementing the basic structure of the search engine with limited capabilities.
 attempting to improve the search quality + some advancements in time efficiency
 - [x] removing noises from the texts (non alphabets)
 - [x] create new branch
-- [ ] remove stopping words
+- [ ] remove stopping words [list of stopwords](https://www.geeksforgeeks.org/removing-stop-words-nltk-python/)
 - [ ] AND: intersection method
 - [ ] OR: Union method
 - [ ] Subtraction method
