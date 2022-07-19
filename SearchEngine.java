@@ -11,7 +11,6 @@ class SearchEngine{
           docNames = new HashMap<>();
      }
 
-     
      public static ArrayList<String> advanceSearch(Query query){
           return getDocNames(process(query));
      }
@@ -49,40 +48,16 @@ class SearchEngine{
           return result;
      }
 
-     private static ArrayList<Integer> intersection(ArrayList<Integer> a, ArrayList<Integer> b){
-          ArrayList<Integer> result = (ArrayList<Integer>) a.clone();
-          result.retainAll(b);
-          return result;
-     }
-     private static ArrayList<Integer> union(ArrayList<Integer> a, ArrayList<Integer> b){
-          ArrayList<Integer> result = new ArrayList<Integer>();
-          result.addAll(a);
-          result.addAll(b);
-          for (Integer e : intersection(a, b)) {
-              result.remove(e);
-          }
-          return result;
-     }
-     private static ArrayList<Integer> subtract(ArrayList<Integer> a, ArrayList<Integer> b){
-          ArrayList<Integer> result = new ArrayList<Integer>();
-          result.addAll(a);
-          for (Integer e : intersection(a, b)) {
-              result.remove(e);
-          }
-          return result;
-     }
-     
-
      private static ArrayList<Integer> process(Query query){
           ArrayList<Integer> positiveWords = query.positiveWords.isEmpty()? new ArrayList<>(docNames.keySet()) : new ArrayList<>();
           ArrayList<Integer> simpleWords = new ArrayList<>(docNames.keySet());
           ArrayList<Integer> negativeWords = new ArrayList<>();
 
-          for (String word : query.simpleWords) simpleWords = intersection(simpleWords, getDocsList(word));
-          for (String word : query.negativeWords) negativeWords = union(negativeWords, getDocsList(word));
-          for (String word : query.positiveWords) positiveWords = union(positiveWords, getDocsList(word));
+          for (String word : query.simpleWords) simpleWords = OrderedSet.intersection(simpleWords, getDocsList(word));
+          for (String word : query.negativeWords) negativeWords = OrderedSet.union(negativeWords, getDocsList(word));
+          for (String word : query.positiveWords) positiveWords = OrderedSet.union(positiveWords, getDocsList(word));
 
-          return subtract(intersection(simpleWords, positiveWords), negativeWords);
+          return OrderedSet.subtract(OrderedSet.intersection(simpleWords, positiveWords), negativeWords);
      }
          
 }
