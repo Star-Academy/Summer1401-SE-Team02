@@ -11,10 +11,12 @@ attempting to improve the search quality + some advancements in time efficiency
 - [x] removing noises from the texts (non alphabets)
 - [x] create new branch
 - [ ] remove stopping words [list of stopwords](https://www.geeksforgeeks.org/removing-stop-words-nltk-python/)
-- [ ] AND: intersection method
-- [ ] OR: Union method
-- [ ] Subtraction method
+- [x] AND: intersection method
+- [x] OR: Union method
+- [x] Subtraction method
 
+## Clean Code
+- [ ] Seperate FileReader class
 
 ## Bugs to fix
 - [ ] repetetive docIDs in posting list (current time complexity is linear)
