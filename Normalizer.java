@@ -12,9 +12,7 @@ public class Normalizer {
     
     private static ArrayList<String> tokenize(String text){
         ArrayList<String> tokenized = new ArrayList<String>();
-        for (String token : text.split("\\s+")) {
-             tokenized.add(token);
-        }
+        for (String token : text.split("\\s+")) tokenized.add(token);
         return tokenized;
    }
 

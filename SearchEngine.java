@@ -1,4 +1,3 @@
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,36 +13,12 @@ class SearchEngine{
 
      
      public static ArrayList<String> advanceSearch(Query query){
-          return getDocNames(processQuery(query));
+          return getDocNames(process(query));
      }
 
      private static ArrayList<Integer> getDocsList(String word){
           if (indexedData.containsKey(word.toUpperCase())) return indexedData.get(word.toUpperCase());
           return new ArrayList<Integer>();
-     }
-
-     private static ArrayList<Integer> processQuery(Query query){
-          ArrayList<Integer> result = new ArrayList<>();
-          ArrayList<Integer> result_plus = new ArrayList<>();
-          for (String word : query.positiveWords) result = union(result_plus, getDocsList(word));
-
-          if (!query.simpleWords.isEmpty()){
-               result = getDocsList(query.simpleWords.get(0));
-               for (int j = 0; j < query.simpleWords.size(); j++) {
-                    result = intersection(result, getDocsList(query.simpleWords.get(j)));
-               }
-               for (String word : query.negativeWords) result = subtract(result, getDocsList(word));
-               if (query.positiveWords.isEmpty()) return result;
-               return intersection(result, result_plus);
-          }
-          else if (!query.positiveWords.isEmpty()){
-               result = getDocsList(query.positiveWords.get(0));
-               for (int j = 0; j < query.positiveWords.size(); j++) {
-                    result_plus = union(result_plus, getDocsList(query.positiveWords.get(j)));
-               }
-               for (String word : query.negativeWords) result_plus = subtract(result_plus, getDocsList(word));
-          }
-          return result_plus;
      }
 
      public static void addFile(String text, String docID){
@@ -70,9 +45,7 @@ class SearchEngine{
      private static ArrayList<String> getDocNames(ArrayList<Integer> docIndexes){
           if (docIndexes == null) return null;
           ArrayList<String> result = new ArrayList<>();
-          for (int index : docIndexes){
-               result.add(docNames.get(index));
-          }
+          for (int index : docIndexes) result.add(docNames.get(index));
           return result;
      }
 
@@ -99,5 +72,17 @@ class SearchEngine{
           return result;
      }
      
+
+     private static ArrayList<Integer> process(Query query){
+          ArrayList<Integer> positiveWords = query.positiveWords.isEmpty()? new ArrayList<>(docNames.keySet()) : new ArrayList<>();
+          ArrayList<Integer> simpleWords = new ArrayList<>(docNames.keySet());
+          ArrayList<Integer> negativeWords = new ArrayList<>();
+
+          for (String word : query.simpleWords) simpleWords = intersection(simpleWords, getDocsList(word));
+          for (String word : query.negativeWords) negativeWords = union(negativeWords, getDocsList(word));
+          for (String word : query.positiveWords) positiveWords = union(positiveWords, getDocsList(word));
+
+          return subtract(intersection(simpleWords, positiveWords), negativeWords);
+     }
          
 }
