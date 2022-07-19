@@ -2,7 +2,10 @@ package src;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import src.enums.ColorCodes;
+
 public class View {
+ 
      private static final Scanner scanner;
 
      static {
@@ -19,8 +22,17 @@ public class View {
      }
 
      private static void showOutput(ArrayList<String> output){
-          System.out.println(output);
+          if (output.isEmpty()) _error("Oops! no result ...");
+          else _success(output);
      }
 
+     private static void _error(String message){
+          System.out.println(ColorCodes.RED_BOLD.getCode() + "! " + ColorCodes.ANSI_RESET.getCode() + message);
+     }
+
+     private static void _success(ArrayList<String> output){
+          System.out.println(String.format( "%s+ %snumber of search results: %d\n%s",
+           ColorCodes.GREEN_BOLD.getCode(), ColorCodes.ANSI_RESET.getCode(), output.size(), output));
+     }
 
 }
