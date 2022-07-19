@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Main {      
      public static void main(String[] args) {
           runProgram();
@@ -7,16 +5,6 @@ public class Main {
 
      private static void runProgram(){
           Database.loadData();
-          getQueries();
+          View.run();
      }
-     
-     private static void getQueries(){
-          Scanner scanner = new Scanner(System.in);
-          String command;
-          while (!(command = scanner.nextLine()).equals("-1")){
-               System.out.println(SearchEngine.search(command.toUpperCase()));
-          }
-          scanner.close();
-     }
-     
 }
