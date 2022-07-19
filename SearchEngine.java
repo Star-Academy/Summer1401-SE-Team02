@@ -50,22 +50,10 @@ class SearchEngine{
      }
 
      public static void addFile(String text, String docID){
-          ArrayList<String> words = tokenize(refine(text));
+          ArrayList<String> words = Normalizer.normalize(text);
           int id = docNames.size();
           docNames.put(id, docID);
           for (String word : words) addWord(word, id);
-     }
-
-     private static ArrayList<String> tokenize(String text){
-          ArrayList<String> tokenized = new ArrayList<String>();
-          for (String token : text.split("\\s+")) {
-               tokenized.add(token);
-          }
-          return tokenized;
-     }
-
-     private static String refine(String text){
-          return text.replaceAll("[^a-zA-Z ]", "").toUpperCase();
      }
 
      private static void addWord(String word, int docID){
