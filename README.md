@@ -17,6 +17,9 @@ attempting to improve the search quality + some advancements in time efficiency
 
 ## Clean Code
 - [x] Seperate load data from main class
+- [x] User interface
+- [ ] Normalizer class for word proccessings
+- [ ] View class and query handler
 
 ## Bugs to fix
 - [ ] repetetive docIDs in posting list (current time complexity is linear)

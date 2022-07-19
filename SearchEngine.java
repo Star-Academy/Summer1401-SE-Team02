@@ -1,5 +1,7 @@
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 class SearchEngine{
      private static HashMap<String, ArrayList<Integer> > indexedData;
@@ -10,35 +12,41 @@ class SearchEngine{
           docNames = new HashMap<>();
      }
 
-     public static ArrayList<String> search(String query){
-          return getDocNames(processQuery(query.split("\\s+")));
+     // public static ArrayList<String> search(String query){
+     //      return getDocNames(processQuery(query.split("\\s+")));
+     // }
+     
+     public static ArrayList<String> advanceSearch(Query query){
+          return getDocNames(processQuery(query));
      }
 
      private static ArrayList<Integer> getDocsList(String word){
-          if (indexedData.containsKey(word.toUpperCase())) return indexedData.get(word);
+          if (indexedData.containsKey(word.toUpperCase())) return indexedData.get(word.toUpperCase());
           return new ArrayList<Integer>();
      }
 
-     private static ArrayList<Integer> processQuery(String[] queryParts){
+     private static ArrayList<Integer> processQuery(Query query){
           ArrayList<Integer> result = new ArrayList<>();
           ArrayList<Integer> result_plus = new ArrayList<>();
-          boolean[] flags = {false, false};
-          for (String query : queryParts){
-               if (query.startsWith("+")) {
-                    flags[0] = true;
-                    result_plus = union(result_plus, getDocsList(query.substring(1)));
+          for (String word : query.positiveWords) result = union(result_plus, getDocsList(word));
+
+          if (!query.simpleWords.isEmpty()){
+               result = getDocsList(query.simpleWords.get(0));
+               for (int j = 0; j < query.simpleWords.size(); j++) {
+                    result = intersection(result, getDocsList(query.simpleWords.get(j)));
                }
-               else if (query.startsWith("-")) result = subtract(result, getDocsList(query.substring(1)));
-               else{
-                    flags[1] = true;
-                    if (result.isEmpty()) result = getDocsList(query);
-                    else result = intersection(result, getDocsList(query));
-               }
-               
+               for (String word : query.negativeWords) result = subtract(result, getDocsList(word));
+               if (query.positiveWords.isEmpty()) return result;
+               return intersection(result, result_plus);
           }
-          if (flags[0]){
-               return (flags[1]) ? intersection(result, result_plus) : result_plus;
-          }else return result;
+          else if (!query.positiveWords.isEmpty()){
+               result = getDocsList(query.positiveWords.get(0));
+               for (int j = 0; j < query.positiveWords.size(); j++) {
+                    result_plus = union(result_plus, getDocsList(query.positiveWords.get(j)));
+               }
+               for (String word : query.negativeWords) result_plus = subtract(result_plus, getDocsList(word));
+          }
+          return result_plus;
      }
 
      public static void addFile(String text, String docID){

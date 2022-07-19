@@ -1,7 +1,7 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class View {
-     private static final String END_PROGRAM = "-1";
      private static final Scanner scanner;
 
      static {
@@ -9,10 +9,19 @@ public class View {
      }
 
      public static void run(){
-          String command;
-          while (!(command = scanner.nextLine()).equals(END_PROGRAM)){
-               System.out.println(SearchEngine.search(command.toUpperCase()));
+          Query query;
+          while (!(query = new Query(scanner.nextLine())).isEnd()){
+               query.process();
+               showOutput(SearchEngine.advanceSearch(query));
           }
           scanner.close();
      }
+
+
+
+     private static void showOutput(ArrayList<String> output){
+          System.out.println(output);
+     }
+
+
 }
