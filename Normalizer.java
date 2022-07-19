@@ -14,9 +14,9 @@ public class Normalizer {
         ArrayList<String> tokenized = new ArrayList<String>();
         for (String token : text.split("\\s+")) tokenized.add(token);
         return tokenized;
-   }
+    }
 
-   private static String refine(String text){
+    private static String refine(String text){
     return text.replaceAll("[^a-zA-Z ]", "").toUpperCase();
     }
 
@@ -24,6 +24,6 @@ public class Normalizer {
         words.removeAll(stopWords);
         return words;
         }
-    }
+}
     
 

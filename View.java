@@ -17,8 +17,6 @@ public class View {
           scanner.close();
      }
 
-
-
      private static void showOutput(ArrayList<String> output){
           System.out.println(output);
      }
