@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.Scanner;
 
 public class Main {      
@@ -7,7 +6,7 @@ public class Main {
      }
 
      private static void runProgram(){
-          loadData();
+          Database.loadData();
           getQueries();
      }
      
@@ -20,29 +19,4 @@ public class Main {
           scanner.close();
      }
      
-     
-     private static void loadData(){
-          try {
-               loadFiles();               
-          } catch (Exception e) {
-               System.out.println(e);
-          }
-     }
-
-     private static void loadFiles() throws Exception{
-          File directory = new File("Docs");
-          for (File file : directory.listFiles()) {
-               loadFile(file);
-          }    
-     }
-
-     private static void loadFile(File file) throws Exception{
-          Scanner scanner = new Scanner(file);
-          StringBuilder text = new StringBuilder();
-          while(scanner.hasNextLine()){
-               text.append(scanner.nextLine() + " ");
-          }
-          SearchEngine.addFile(text.toString(), file.getName());
-          scanner.close();
-     }
 }

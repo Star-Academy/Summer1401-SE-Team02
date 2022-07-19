@@ -16,7 +16,7 @@ attempting to improve the search quality + some advancements in time efficiency
 - [x] Subtraction method
 
 ## Clean Code
-- [ ] Seperate FileReader class
+- [x] Seperate load data from main class
 
 ## Bugs to fix
 - [ ] repetetive docIDs in posting list (current time complexity is linear)
