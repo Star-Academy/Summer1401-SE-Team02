@@ -8,7 +8,6 @@ public class Normalizer {
     public static ArrayList<String> normalize(String text) {
         ArrayList<String> result = removeStopWords(tokenize(refine(text)));
         return result;
-        
     }
     
     private static ArrayList<String> tokenize(String text){

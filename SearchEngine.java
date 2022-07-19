@@ -12,9 +12,6 @@ class SearchEngine{
           docNames = new HashMap<>();
      }
 
-     // public static ArrayList<String> search(String query){
-     //      return getDocNames(processQuery(query.split("\\s+")));
-     // }
      
      public static ArrayList<String> advanceSearch(Query query){
           return getDocNames(processQuery(query));
@@ -50,10 +47,8 @@ class SearchEngine{
      }
 
      public static void addFile(String text, String docID){
-          ArrayList<String> words = Normalizer.normalize(text);
-          int id = docNames.size();
-          docNames.put(id, docID);
-          for (String word : words) addWord(word, id);
+          docNames.put(docNames.size(), docID);
+          for (String word : Normalizer.normalize(text)) addWord(word, docNames.size() - 1);
      }
 
      private static void addWord(String word, int docID){
@@ -62,9 +57,7 @@ class SearchEngine{
                docs.add(docID);
                indexedData.put(word, docs);
           }
-          else {
-               insertDocID(word, indexedData.get(word), docID);
-          }
+          else insertDocID(word, indexedData.get(word), docID);
      }
 
      private static void insertDocID(String word, ArrayList<Integer> docsIDs, int docID){
