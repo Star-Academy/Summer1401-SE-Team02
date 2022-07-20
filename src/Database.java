@@ -2,8 +2,9 @@ package src;
 import java.io.File;
 import java.util.Scanner;
 
+import src.enums.Constants;
+
 public class Database {
-     private static final String DATA_FOLDER = "Docs";
      
      public static void loadData(){
           try {
@@ -14,7 +15,7 @@ public class Database {
      }
 
      private static void loadFilesToSearchEngine() throws Exception{
-          File directory = new File(DATA_FOLDER);
+          File directory = new File(Constants.DOCS_FOlDER.toString());
           for (File file : directory.listFiles()) {
                SearchEngine.addFile(loadFile(file), file.getName());
           }    

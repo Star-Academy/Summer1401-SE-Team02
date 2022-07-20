@@ -3,7 +3,6 @@ package src;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import src.enums.ColorCodes;
 import src.enums.Constants;
 
 public class View {
@@ -35,12 +34,11 @@ public class View {
      }
 
      private static void _error(String message) {
-          System.out.println(ColorCodes.RED_BOLD.getCode() + "! " + ColorCodes.ANSI_RESET.getCode() + message);
+          System.out.println(String.format(Constants.ERROR_MESSAGE.toString(), message));
      }
 
      private static void _success(ArrayList<String> output) {
-          System.out.println(String.format("%s+ %snumber of search results: %d\n%s",
-                    ColorCodes.GREEN_BOLD.getCode(), ColorCodes.ANSI_RESET.getCode(), output.size(), output));
+          System.out.println(String.format(Constants.SUCCESS_MESSAGE.toString(), output.size(), output));
      }
 
 }
