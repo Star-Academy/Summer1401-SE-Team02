@@ -21,8 +21,8 @@ class SearchEngine{
           return new ArrayList<Integer>();
      }
 
-     public static void addFile(String text, String docID){
-          docNames.put(docNames.size(), docID);
+     public static void addFile(String text, String docId){
+          docNames.put(docNames.size(), docId);
           for (String word : Normalizer.normalize(text)) addWord(word, docNames.size() - 1);
      }
 
