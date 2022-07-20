@@ -28,16 +28,16 @@ public class View {
 
      private static void showOutput(ArrayList<String> output) {
           if (output.isEmpty())
-               _error("Oops! no result ...");
+               error("Oops! no result ...");
           else
-               _success(output);
+               success(output);
      }
 
-     private static void _error(String message) {
+     private static void error(String message) {
           System.out.println(String.format(Constants.ERROR_MESSAGE.toString(), message));
      }
 
-     private static void _success(ArrayList<String> output) {
+     private static void success(ArrayList<String> output) {
           System.out.println(String.format(Constants.SUCCESS_MESSAGE.toString(), output.size(), output));
      }
 

@@ -16,10 +16,7 @@ public class Normalizer {
     }
 
     private static ArrayList<String> tokenize(String text) {
-        ArrayList<String> tokenized = new ArrayList<String>();
-        for (String token : text.split("\\s+"))
-            tokenized.add(token);
-        return tokenized;
+        return new ArrayList<String>(Arrays.asList(text.split(Constants.SPACE.toString())));
     }
 
     private static String refine(String text) {
