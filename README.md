@@ -54,3 +54,6 @@ number of search results: 3
 #### End of program
 simply type ```-1``` to finish the program.
 
+## Interfaces
+### Query
+you can also create any kind of query that you want, simply by implementing Query interface.  imagine we want to add the feature of querying by sentences (complete human language support); this can be simply done without violating the Open/Closed principle of SOLID.
