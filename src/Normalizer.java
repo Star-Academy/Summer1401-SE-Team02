@@ -8,10 +8,9 @@ import src.enums.Constants;
 public class Normalizer {
 
     public static ArrayList<String> normalize(String text) {
+        String[] stoppingWords = Constants.STOPPING_WORDS.toString().toUpperCase().split(Constants.SPACE.toString());
         ArrayList<String> result = removeStopWords(tokenize(refine(text)),
-                new ArrayList<String>(
-                        Arrays.asList(
-                                Constants.STOPPING_WORDS.toString().toUpperCase().split(Constants.SPACE.toString()))));
+                new ArrayList<String>(Arrays.asList(stoppingWords)));
         return result;
     }
 
