@@ -2,33 +2,34 @@ package src;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import src.models.QueryInterface;
 
 public class SearchEngine {
-     private static HashMap<String, ArrayList<Integer>> indexedData;
-     public static HashMap<Integer, String> docNames;
+     private HashMap<String, ArrayList<Integer>> indexedData;
+     public HashMap<Integer, String> docNames;
 
-     static {
-          indexedData = new HashMap<>();
-          docNames = new HashMap<>();
+     public SearchEngine() {
+          this.indexedData = new HashMap<>();
+          this.docNames = new HashMap<>();
      }
 
-     public static ArrayList<String> advanceSearch(Query query) {
+     public ArrayList<String> advanceSearch(QueryInterface query) {
           return getDocNames(process(query));
      }
 
-     private static ArrayList<Integer> getDocsList(String word) {
+     private ArrayList<Integer> getDocsList(String word) {
           if (indexedData.containsKey(word.toUpperCase()))
                return indexedData.get(word.toUpperCase());
           return new ArrayList<Integer>();
      }
 
-     public static void addFile(String docId, String text) {
+     public void addFile(String docId, ArrayList<String> tokens) {
           docNames.put(docNames.size(), docId);
-          for (String word : Normalizer.normalize(text))
+          for (String word : tokens)
                addWord(word, docNames.size() - 1);
      }
 
-     private static void addWord(String word, int docID) {
+     private void addWord(String word, int docID) {
           if (!indexedData.containsKey(word)) {
                ArrayList<Integer> docs = new ArrayList<>();
                docs.add(docID);
@@ -37,14 +38,14 @@ public class SearchEngine {
                insertDocID(word, indexedData.get(word), docID);
      }
 
-     private static void insertDocID(String word, ArrayList<Integer> docsIDs, int docID) {
+     private void insertDocID(String word, ArrayList<Integer> docsIDs, int docID) {
           if (!indexedData.get(word).contains(docID)) {
                docsIDs.add(docID);
                indexedData.put(word, docsIDs);
           }
      }
 
-     private static ArrayList<String> getDocNames(ArrayList<Integer> docIndexes) {
+     private ArrayList<String> getDocNames(ArrayList<Integer> docIndexes) {
           if (docIndexes == null)
                return null;
           ArrayList<String> result = new ArrayList<>();
@@ -53,20 +54,22 @@ public class SearchEngine {
           return result;
      }
 
-     private static ArrayList<Integer> process(Query query) {
-          ArrayList<Integer> positiveWords = query.positiveWords.isEmpty() ? new ArrayList<>(docNames.keySet())
+     private ArrayList<Integer> process(QueryInterface query) {
+          OrderedSet orderedSet = new OrderedSet();
+          ArrayList<Integer> positiveWords = query.getLeastPresencengWords().isEmpty()
+                    ? new ArrayList<>(docNames.keySet())
                     : new ArrayList<>();
           ArrayList<Integer> simpleWords = new ArrayList<>(docNames.keySet());
           ArrayList<Integer> negativeWords = new ArrayList<>();
 
-          for (String word : query.simpleWords)
-               simpleWords = OrderedSet.intersection(simpleWords, getDocsList(word));
-          for (String word : query.negativeWords)
-               negativeWords = OrderedSet.union(negativeWords, getDocsList(word));
-          for (String word : query.positiveWords)
-               positiveWords = OrderedSet.union(positiveWords, getDocsList(word));
+          for (String word : query.getIncludingWords())
+               simpleWords = orderedSet.intersection(simpleWords, getDocsList(word));
+          for (String word : query.getExcludingWords())
+               negativeWords = orderedSet.union(negativeWords, getDocsList(word));
+          for (String word : query.getLeastPresencengWords())
+               positiveWords = orderedSet.union(positiveWords, getDocsList(word));
 
-          return OrderedSet.subtract(OrderedSet.intersection(simpleWords, positiveWords), negativeWords);
+          return orderedSet.subtract(orderedSet.intersection(simpleWords, positiveWords), negativeWords);
      }
 
 }

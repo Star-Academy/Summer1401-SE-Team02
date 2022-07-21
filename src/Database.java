@@ -7,20 +7,22 @@ import src.enums.Constants;
 
 public class Database {
 
-     private static HashMap<String, String> dataSet;
+     private HashMap<String, String> dataSet;
+     private FileReader fileReader;
 
-     static {
-          dataSet = new HashMap<>();
+     public Database(){
+          this.dataSet = new HashMap<>();
+          this.fileReader = new FileReader();
      }
 
-     public static void loadData() {
+     public void loadData() {
           File directory = new File(Constants.DOCS_FOlDER.toString());
           for (File file : directory.listFiles()) {
-               dataSet.put(file.getName(), FileReader.readFile(file));
+               dataSet.put(file.getName(), this.fileReader.readFile(file));
           }
      }
 
-     public static HashMap<String, String> getDataSet() {
+     public HashMap<String, String> getDataSet() {
           return dataSet;
      }
 

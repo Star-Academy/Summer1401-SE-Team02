@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class FileReader {
 
-     public static String readFile(File file) {
+     public String readFile(File file) {
           try {
                Scanner scanner = new Scanner(file);
                StringBuilder text = new StringBuilder();
