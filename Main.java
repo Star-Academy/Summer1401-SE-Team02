@@ -1,46 +1,27 @@
-import java.io.File;
-import java.util.Scanner;
+import java.util.HashMap;
 
-public class Main {      
+import src.Database;
+import src.View;
+import src.SearchEngine;
+import src.Normalizer;
+
+public class Main {
      public static void main(String[] args) {
           runProgram();
      }
 
-     private static void runProgram(){
-          loadData();
-          getQueries();
-     }
-     
-     
-     private static void getQueries(){
-          Scanner scanner = new Scanner(System.in);
-          String word;
-          while (!(word = scanner.nextLine()).equals("-1")){
-               System.out.println(SearchEngine.search(word.toUpperCase()));
-          }
-     }
-     private static void loadData(){
-          try {
-               loadFiles();               
-          } catch (Exception e) {
-               System.out.println(e);
-          }
+     private static void runProgram() {
+          Database database = new Database();
+          SearchEngine searchEngine = new SearchEngine();
+          database.loadData();
+          indexData(database.getDataSet(), searchEngine);
+          new View().run(searchEngine);
      }
 
-     private static void loadFiles() throws Exception{
-          File directory = new File("Docs");
-          for (File file : directory.listFiles()) {
-               loadFile(file);
-          }    
-     }
-
-     private static void loadFile(File file) throws Exception{
-          Scanner scanner = new Scanner(file);
-          StringBuilder text = new StringBuilder();
-          while(scanner.hasNextLine()){
-               text.append(scanner.nextLine() + " ");
-          }
-          SearchEngine.addFile(text.toString(), file.getName());
-          scanner.close();
+     private static void indexData(HashMap<String, String> dataSet, SearchEngine searchEngine) {
+          Normalizer normalizer = new Normalizer();
+          dataSet.forEach((fileName, fileContent) -> {
+               searchEngine.addFile(fileName, normalizer.normalize(fileContent));
+          });
      }
 }
