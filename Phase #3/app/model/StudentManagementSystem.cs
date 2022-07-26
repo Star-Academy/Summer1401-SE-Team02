@@ -8,14 +8,13 @@ public class StudentManagementSystem
           this.students = new Dictionary<int, Student>();
      }
 
-     public void addStudent(Student student) => this.students.Add(student.StudentNumber, student);
-     // public List<Student> getTopNStudents(int n) => 
+     public void RegisterStudent(Student student) => this.students.Add(student.StudentNumber, student);
 
-     public void importGrades(List<Grade> grades)
+     public void ImportGrades(List<Grade> grades)
      {
-          foreach (Grade grade in grades) students[grade.StudentNumber].addGrade(grade);
+          foreach (Grade grade in grades) students[grade.StudentNumber].AddGrade(grade);
      }     
 
      public IEnumerable<Student> getNTopStudents(int n)
-          => students.Values.ToList().OrderBy(s => s.Average()).Take(n);
+          => students.Values.ToList().OrderByDescending(s => s.Average()).Take(n);
 }
