@@ -1,8 +1,6 @@
 public class Controller
 {
 
-     string StudentsFile = @"resources/students.json";
-     string GradesFile = @"resources/grades.json";
 
      public void RunProgram()
      {
@@ -10,15 +8,16 @@ public class Controller
           FileReader fileReader = new FileReader();
           StudentManagementSystem studentManagementSystem = new StudentManagementSystem();
           IDeserializer deserializer = new JsonDeserializer();
+          IDataProvider fileDataProvider = new FileDataProvider(fileReader);
+          View view = new View();
 
-          List<Student> students = deserializer.Deserialize<Student>(fileReader.ReadFile(StudentsFile));
-          List<Grade> grades = deserializer.Deserialize<Grade>(fileReader.ReadFile(GradesFile));
+          List<Student> students = deserializer.Deserialize<Student>(fileDataProvider.GetStudentsData());
+          List<Grade> grades = deserializer.Deserialize<Grade>(fileDataProvider.GetGradesData());
 
           RegisterStudents(students, studentManagementSystem);
           studentManagementSystem.ImportGrades(grades);
 
-          foreach(Student student in studentManagementSystem.getNTopStudents(3)) Console.WriteLine(student);
-
+          view.ShowList(studentManagementSystem.getNTopStudents(3));
      }
 
 

@@ -1,3 +1,4 @@
 public class FileReader
-{     public string ReadFile(string path) => File.ReadAllText(path);
+{     
+     public string ReadFile(string path) => File.ReadAllText(path);
 }
