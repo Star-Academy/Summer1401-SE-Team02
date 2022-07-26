@@ -9,7 +9,6 @@ Simple C# project to output the N best students regarding their grades average.
 * Support for different serializing methods (Json icluded)
 
 ## Installation
-#### simple search (single word)
 simply run the program and output will be shown.
 ex: for the files included in resources folder, the output would be as below: 
 
