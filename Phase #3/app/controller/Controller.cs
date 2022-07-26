@@ -11,20 +11,13 @@ public class Controller
           IDataProvider fileDataProvider = new FileDataProvider(fileReader);
           View view = new View();
 
-          List<Student> students = deserializer.Deserialize<Student>(fileDataProvider.GetStudentsData());
-          List<Grade> grades = deserializer.Deserialize<Grade>(fileDataProvider.GetGradesData());
+          List<Student> students = deserializer.Deserialize<Student>(fileDataProvider.GetData(Constants.STUDENTS_FILE_ADDRESS));
+          List<Grade> grades = deserializer.Deserialize<Grade>(fileDataProvider.GetData(Constants.GRADES_FILE_ADDRESS));
 
-          RegisterStudents(students, studentManagementSystem);
+          studentManagementSystem.RegisterStudents(students);
           studentManagementSystem.ImportGrades(grades);
 
           view.ShowList(studentManagementSystem.getNTopStudents(3));
      }
-
-
-     private void RegisterStudents(List<Student> students, StudentManagementSystem studentManagementSystem)
-     {
-          foreach (Student s in students) studentManagementSystem.RegisterStudent(s);
-     }
-
 
 }

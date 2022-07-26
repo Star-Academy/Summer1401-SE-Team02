@@ -9,7 +9,11 @@ public class StudentManagementSystem
      }
 
      public void RegisterStudent(Student student) => this.students.Add(student.StudentNumber, student);
-
+     public void RegisterStudents(List<Student> students)
+     {
+          foreach (Student s in students) RegisterStudent(s);
+     }
+     
      public void ImportGrades(List<Grade> grades)
      {
           foreach (Grade grade in grades) students[grade.StudentNumber].AddGrade(grade);
