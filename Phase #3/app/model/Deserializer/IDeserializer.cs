@@ -1,4 +1,6 @@
+namespace app.model.Deserializer;
+
 public interface IDeserializer
 {
-     public List<T> Deserialize<T>(string text);
+    public T Deserialize<T>(string text);
 }

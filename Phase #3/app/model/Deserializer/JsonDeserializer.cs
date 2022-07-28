@@ -1,6 +1,8 @@
 using System.Text.Json;
 
+namespace app.model.Deserializer;
+
 public class JsonDeserializer : IDeserializer
 {
-     public List<T> Deserialize<T>(string text) => JsonSerializer.Deserialize<List<T>>(text);
+    public T Deserialize<T>(string text) => JsonSerializer.Deserialize<T>(text);
 }
