@@ -1,0 +1,12 @@
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/bin/Debug/net6.0/SampleLibrary.deps.json
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/bin/Debug/net6.0/SampleLibrary.dll
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/bin/Debug/net6.0/SampleLibrary.pdb
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/SampleLibrary.csproj.AssemblyReference.cache
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/SampleLibrary.GeneratedMSBuildEditorConfig.editorconfig
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/SampleLibrary.AssemblyInfoInputs.cache
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/SampleLibrary.AssemblyInfo.cs
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/SampleLibrary.csproj.CoreCompileInputs.cache
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/SampleLibrary.dll
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/refint/SampleLibrary.dll
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/SampleLibrary.pdb
+/home/sajad/Programming/codestar/Summer1401-SE-Team02/SampleLibrary/SampleLibrary/obj/Debug/net6.0/ref/SampleLibrary.dll
