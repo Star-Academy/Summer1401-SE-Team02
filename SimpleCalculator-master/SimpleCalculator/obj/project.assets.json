@@ -1,0 +1,88 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "SimpleCalculator.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/SimpleCalculator.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SimpleCalculator.Business.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SimpleCalculator.Business/1.0.0": {
+      "type": "project",
+      "path": "../SimpleCalculator.Business/SimpleCalculator.Business.csproj",
+      "msbuildProject": "../SimpleCalculator.Business/SimpleCalculator.Business.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "SimpleCalculator.Business >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/sajad/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/sajad/Programming/codestar/Summer1401-SE-Team02/SimpleCalculator-master/SimpleCalculator/SimpleCalculator.Console.csproj",
+      "projectName": "SimpleCalculator.Console",
+      "projectPath": "/home/sajad/Programming/codestar/Summer1401-SE-Team02/SimpleCalculator-master/SimpleCalculator/SimpleCalculator.Console.csproj",
+      "packagesPath": "/home/sajad/.nuget/packages/",
+      "outputPath": "/home/sajad/Programming/codestar/Summer1401-SE-Team02/SimpleCalculator-master/SimpleCalculator/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/sajad/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "/home/sajad/Programming/codestar/Summer1401-SE-Team02/SimpleCalculator-master/SimpleCalculator.Business/SimpleCalculator.Business.csproj": {
+              "projectPath": "/home/sajad/Programming/codestar/Summer1401-SE-Team02/SimpleCalculator-master/SimpleCalculator.Business/SimpleCalculator.Business.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.302/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
