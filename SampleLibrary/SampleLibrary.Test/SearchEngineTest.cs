@@ -44,14 +44,14 @@ public class SearchEngineTest
     }
 
     [Fact]
-    public void Search_MultiplePositiveWords_ReturnIncludingSources()
+    public void Search_MultiplePositiveWords_ReturnSourcesIncludingAtLeastOneOfThem()
     {
         var result = _searchEngine.Search(new MultipleWordsQuery("+search +complex"));
         result.Should().Equal(new List<string>() { "source1", "source2" });
     }
 
     [Fact]
-    public void Search_MultipleNegativeWords_ReturnIncludingSources()
+    public void Search_MultipleNegativeWords_ReturnNonContainingSources()
     {
         var result = _searchEngine.Search(new MultipleWordsQuery("-better -believe"));
         result.Should().Equal(new List<string>() { "source1" });
@@ -60,7 +60,7 @@ public class SearchEngineTest
     [Theory]
     [MemberData(nameof(SearchQueryDataLowerCase))]
     [MemberData(nameof(SearchQueryDataUpperOrLowerCase))]
-    public void Search_MultipleWordsWithUpperOrLowerCharacters_ReturnIncludingSources(string query,
+    public void Search_MultipleWordsWithUpperOrLowercaseCharacters_ReturnIncludingSources(string query,
         List<String> expected)
     {
         var result = _searchEngine.Search(new MultipleWordsQuery(query));

@@ -6,6 +6,7 @@ namespace SampleLibrary.Queries;
 public class MultipleWordsQuery : IQuery
 {
     private readonly string _query;
+
     public MultipleWordsQuery(string query)
     {
         _query = query;
@@ -19,7 +20,6 @@ public class MultipleWordsQuery : IQuery
     public List<string> GetLeastOnceIncludingWords()
     {
         return ExtractMatchedWords(Constants.PositiveWordsRegex);
-
     }
 
     public List<string> GetExcludingWords()
@@ -29,10 +29,8 @@ public class MultipleWordsQuery : IQuery
 
     private List<string> ExtractMatchedWords(string pattern)
     {
-        var result = new List<string>();
         Regex regex = new Regex(pattern, RegexOptions.Compiled);
-        foreach (var word in _query.Split())
-            if (regex.IsMatch(word)) result.Add(regex.Match(word).Groups[1].Value);
-        return result;
+        return new List<string>(_query.Split().Where(x => regex.IsMatch(x))
+            .Select(x => regex.Match(x).Groups[1].Value));
     }
 }

@@ -64,7 +64,7 @@ public class NormalizerTest
     [Theory]
     [InlineData("string without any special character", "string without any special character")]
     [InlineData("keeping    white   spaces", "keeping    white   spaces")]
-    public void Refine_AlphabeticalCharsOnly_ReturnWithoutChange(string sentence, string expected)
+    public void Refine_AlphabeticalCharsOnly_ReturnInputWithoutChange(string sentence, string expected)
     {
         var result = _basicNormalizer.Refine(sentence);
         result.Should().Be(expected);
@@ -73,7 +73,7 @@ public class NormalizerTest
     [Theory]
     [InlineData("string, with; $some^ #special %chars!", "string with some special chars")]
     [InlineData("123numerical 485values0", "numerical values")]
-    public void Refine_NonAlphabeticalCharsIncluded_ReturnWithoutSpecialChars(string sentence, string expected)
+    public void Refine_NonAlphabeticalCharsIncluded_ReturnWithoutSpecialCharacters(string sentence, string expected)
     {
         var result = _basicNormalizer.Refine(sentence);
         result.Should().Be(expected);
@@ -84,7 +84,7 @@ public class NormalizerTest
     #region Stopping Wrods remove test
 
     [Fact]
-    public void RemoveStoppingWords_SimpleCondition_ReturnListWithoutStoppingWords()
+    public void RemoveStoppingWords_SimpleCondition_ReturnStringWithoutStoppingWords()
     {
         var result = _basicNormalizer.RemoveStoppingWords("this is a test for removing stopping words");
         result.Should().Be("test removing stopping words");
@@ -102,7 +102,7 @@ public class NormalizerTest
     }
     
     [Fact]
-    public void Normalize_TextWithNonAlphabeticalChars_ReturnTheListOfUpperCasedMainWords()
+    public void Normalize_TextWithNonAlphabeticalCharacters_ReturnTheListOfUpperCasedMainWords()
     {
         var result = _basicNormalizer.Normalize("#non! @alphabetical 123 (chars;) [included.]");
         result.Should().Equal(new List<string>() {"NON", "ALPHABETICAL", "CHARS", "INCLUDED"});
@@ -111,7 +111,7 @@ public class NormalizerTest
     [Fact]
     public void Normalize_CommaIncludedText_ReturnTheListOfUpperCasedMainWords()
     {
-        var result = _basicNormalizer.Normalize("test for, commas,,, in the text");
+        var result = _basicNormalizer.Normalize("test for, commas,,, in the text.");
         result.Should().Equal(new List<string>() {"TEST", "COMMAS", "TEXT"});
     }
 

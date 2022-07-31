@@ -5,13 +5,12 @@ namespace SampleLibrary.Test;
 
 public class QueryTest
 {
-
     #region SingleQueryTest
 
     [Theory]
     [InlineData("test")]
     [InlineData("new")]
-    public void GetMustIncludingWords_SingleWordQuery_ReturnTheListContainingTheWord(string singleWord)
+    public void GetMustIncludingWords_SingleWordQuery_ReturnTheListContainingTheInputWord(string singleWord)
     {
         var result = new SingleWordQuery(singleWord).GetMustIncludingWords();
         result.Should().Equal(new List<string>() { singleWord });
@@ -36,9 +35,9 @@ public class QueryTest
     }
 
     #endregion
-    
+
     #region MultipleWordsQuery
-    
+
     [Theory]
     [InlineData("simple words query")]
     [InlineData("longer test for multiple word query")]
@@ -47,18 +46,18 @@ public class QueryTest
         var result = new MultipleWordsQuery(query).GetMustIncludingWords();
         result.Should().Equal(query.Split().ToList());
     }
-    
+
     [Theory]
     [InlineData("multiple +words -query")]
     [InlineData("longer -test -for multiple word +query")]
-    public void GetMustIncludingWords_MultipleTypeQuery_ReturnListOfWords(string query)
+    public void GetMustIncludingWords_MultipleTypeQuery_ReturnListOfMustIncludingWords(string query)
     {
         var result = new MultipleWordsQuery(query).GetMustIncludingWords();
         result.Should().Equal(query.Split().ToList().Where(x => !(x.StartsWith("+") || x.StartsWith("-"))));
     }
-    
+
     [Fact]
-    public void GetMustIncludingWords_NoSimpleWordQuery_ReturnEmptyList()
+    public void GetMustIncludingWords_QueryWithoutSimpleWord_ReturnEmptyList()
     {
         var result = new MultipleWordsQuery("+test -without +simple -word").GetMustIncludingWords();
         result.Should().BeEmpty();
@@ -67,7 +66,7 @@ public class QueryTest
     [Theory]
     [InlineData("multiple +words -query")]
     [InlineData("longer -test -for multiple word +query")]
-    public void GetLeastOnceIncludingWords_MultipleTypeQuery_ReturnListOfWords(string query)
+    public void GetLeastOnceIncludingWords_MultipleTypeQuery_ReturnListOfPositiveWords(string query)
     {
         var result = new MultipleWordsQuery(query).GetLeastOnceIncludingWords();
         result.Should().Equal(query.Split().ToList().Where(x => x.StartsWith("+")).Select(x => x.Substring(1)));
@@ -76,41 +75,41 @@ public class QueryTest
     [Theory]
     [InlineData("+single +type +query")]
     [InlineData("+longer +test +for +single +type +query")]
-    public void GetLeastOnceIncludingWords_SingleTypeQuery_ReturnListOfWords(string query)
+    public void GetLeastOnceIncludingWords_SingleTypeQuery_ReturnListOfAllWords(string query)
     {
         var result = new MultipleWordsQuery(query).GetLeastOnceIncludingWords();
         result.Should().Equal(query.Split().ToList().Where(x => x.StartsWith("+")).Select(x => x.Substring(1)));
     }
 
-        
+
     [Fact]
     public void GetLeastOnceIncludingWords_NoPositiveWordQuery_ReturnEmptyList()
     {
         var result = new MultipleWordsQuery("test -without positive -word").GetLeastOnceIncludingWords();
         result.Should().BeEmpty();
     }
-    
+
     [Theory]
     [InlineData("multiple +words -query")]
     [InlineData("longer -test -for multiple word +query")]
-    public void GetExcludingWords_MultipleTypeQuery_ReturnListOfWords(string query)
-    {
-        var result = new MultipleWordsQuery(query).GetExcludingWords();
-        result.Should().Equal(query.Split().ToList().Where(x => x.StartsWith("-")).Select(x => x.Substring(1)));
-    }
-    
-    
-    [Theory]
-    [InlineData("-single -type -query")]
-    [InlineData("-longer -test -for -single -type -query")]
-    public void GetExcludingWords_SingleTypeQuery_ReturnListOfWords(string query)
+    public void GetExcludingWords_MultipleTypeQuery_ReturnListOfNegativeWords(string query)
     {
         var result = new MultipleWordsQuery(query).GetExcludingWords();
         result.Should().Equal(query.Split().ToList().Where(x => x.StartsWith("-")).Select(x => x.Substring(1)));
     }
 
+
+    [Theory]
+    [InlineData("-single -type -query")]
+    [InlineData("-longer -test -for -single -type -query")]
+    public void GetExcludingWords_SingleTypeQuery_ReturnListOfAllWords(string query)
+    {
+        var result = new MultipleWordsQuery(query).GetExcludingWords();
+        result.Should().Equal(query.Split().ToList().Select(x => x.Substring(1)));
+    }
+
     [Fact]
-    public void GetExcludingWords_NoNegativeWordQuery_ReturnEmptyList()
+    public void GetExcludingWords_QueryWithoutNegativeWord_ReturnEmptyList()
     {
         var result = new MultipleWordsQuery("test +without positive +word").GetExcludingWords();
         result.Should().BeEmpty();

@@ -38,11 +38,9 @@ public class SearchEngine
 
     public IEnumerable<string> Search(IQuery query) => MatchSourcesWithIds(ProcessQuery(query));
 
-    private HashSet<string> MatchSourcesWithIds(IEnumerable<int> docIds)
+    private List<string> MatchSourcesWithIds(IEnumerable<int> docIds)
     {
-        HashSet<string> result = new HashSet<string>();
-        foreach (var id in docIds) result.Add(_docNames[id]);
-        return result;
+        return new List<string>(docIds.Select(x => _docNames[x]));
     }
 
     private IEnumerable<int> ProcessQuery(IQuery query)
