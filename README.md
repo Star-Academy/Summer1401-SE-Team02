@@ -3,6 +3,7 @@
 ## Description
 simple search engine simulation to understand how inverted-indexing works. you can search a word, and it will show you the documents containing that specific word.
 
+
 ## Features
 * support for AND/OR operations
 * finding files not including a word (exclusion) 
