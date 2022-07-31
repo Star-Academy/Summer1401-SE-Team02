@@ -8,7 +8,6 @@ namespace SimpleCalculator.Tests;
 public class OperatorsTests
 {
     private readonly SumOperator _sumOperator;
-    private readonly OperatorProvider _operatorProvider;
     private readonly SubOperator _subOperator;
     private readonly MultiplyOperator _multiplyOperator;
     private readonly DivisionOperator _divisionOperator;
@@ -19,48 +18,8 @@ public class OperatorsTests
         _sumOperator = new SumOperator();
         _multiplyOperator = new MultiplyOperator();
         _divisionOperator = new DivisionOperator();
-        _operatorProvider = new OperatorProvider();
     }
     
-
-    #region OperatorProvider tests
-
-    [Fact]
-    public void OperatorProviderGetMethod_SumOperator_ReturnSumOperatorInstance()
-    {
-        var result = _operatorProvider.GetOperator(OperatorEnum.sum);
-        result.Should().BeOfType<SumOperator>();
-    }
-
-    [Fact]
-    public void OperatorProviderGetMethod_SubOperator_ReturnSumOperatorInstance()
-    {
-        var result = _operatorProvider.GetOperator(OperatorEnum.sub);
-        result.Should().BeOfType<SubOperator>();
-    }
-
-    [Fact]
-    public void OperatorProviderGetMethod_DivisionOperator_ReturnSumOperatorInstance()
-    {
-        var result = _operatorProvider.GetOperator(OperatorEnum.division);
-        result.Should().BeOfType<DivisionOperator>();
-    }
-
-    [Fact]
-    public void OperatorProviderGetMethod_MultiplyOperator_ReturnSumOperatorInstance()
-    {
-        var result = _operatorProvider.GetOperator(OperatorEnum.division);
-        result.Should().BeOfType<DivisionOperator>();
-    }
-
-    [Fact]
-    public void OperatorProviderGetMethod_InvalidOperator_ThrowException()
-    {
-        Action action = () => _operatorProvider.GetOperator((OperatorEnum)(-1));
-        action.Should().Throw<NotSupportedException>();
-    }
-
-    #endregion
 
     #region Operators Calculation tests for simple situations
 
