@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <PackageId>StarAcademy.CodeStar1401.Team02.FullTextSearch</PackageId>
+    <PackageId>StarAcademy.CodeStar1401.Team02.SearchEngine</PackageId>
 
     <ImplicitUsings>enable</ImplicitUsings>
     <Authors>Sajad Soltanian</Authors>
     <Company>Star Academy</Company>
+
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="docs\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 </Project>
