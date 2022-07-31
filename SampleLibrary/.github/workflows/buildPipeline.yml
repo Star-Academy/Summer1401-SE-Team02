@@ -1,9 +1,9 @@
 name: build
 on:
   push:
-    branches: [TDD]
+    branches: ["TDD"]
   pull_request:
-    branches: [TDD]
+    branches: ["TDD"]
 jobs:
   build:
     runs-on: ubuntu-latest
