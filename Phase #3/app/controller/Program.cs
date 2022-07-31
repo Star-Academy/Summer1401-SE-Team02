@@ -9,15 +9,15 @@ public class Program
 {
     public void Start()
     {
-        FileReader fileReader = new FileReader();
-        StudentManagementSystem studentManagementSystem = new StudentManagementSystem();
-        IDeserializer deserializer = new JsonDeserializer();
-        IDataProvider dataProvider = new WebDataProvider();
-        UserInterface userInterface = new UserInterface();
+        var fileReader = new FileReader();
+        var studentManagementSystem = new StudentManagementSystem();
+        var deserializer = new JsonDeserializer();
+        var dataProvider = new WebDataProvider();
+        var userInterface = new UserInterface();
 
-        List<Student> students =
+        var students =
             deserializer.Deserialize<List<Student>>(dataProvider.GetData(Constants.StudentsFileLink));
-        List<Grade> grades = deserializer.Deserialize<List<Grade>>(dataProvider.GetData(Constants.GradesFileLink));
+        var grades = deserializer.Deserialize<List<Grade>>(dataProvider.GetData(Constants.GradesFileLink));
 
         studentManagementSystem.RegisterStudents(students);
         studentManagementSystem.ImportGrades(grades);
