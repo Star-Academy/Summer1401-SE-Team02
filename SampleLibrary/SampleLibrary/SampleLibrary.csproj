@@ -2,8 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <PackageId>StarAcademy.CodeStar1401.Team02.SearchEngine</PackageId>
+
     <ImplicitUsings>enable</ImplicitUsings>
+    <Authors>Sajad Soltanian</Authors>
+    <Company>Star Academy</Company>
+
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
 </Project>
