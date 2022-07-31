@@ -9,8 +9,10 @@
     <Company>Star Academy</Company>
     
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <None Include="README.md" Pack="true" PackagePath="\"/>
     
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 </Project>
