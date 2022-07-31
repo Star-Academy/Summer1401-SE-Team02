@@ -10,7 +10,7 @@ public record Student
     public void RegisterGrade(Grade grade) => Grades.Add(grade);
 
     public override string ToString() =>
-        $"{StudentNumber}: {FirstName} {LastName} -> {Math.Round(this.GetAverage(), 2)}";
+        $"{StudentNumber}: {FirstName} {LastName} -> {Math.Round(this.GetAverageOfGrades(), 2)}";
 
-    public double GetAverage() => Grades.Select(g => g.Score).Average();
+    public double GetAverageOfGrades() => Grades.Select(g => g.Score).Average();
 }

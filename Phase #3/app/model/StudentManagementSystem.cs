@@ -20,5 +20,5 @@ public class StudentManagementSystem
     }
 
     public IEnumerable<Student> GetNTopStudents(int n)
-        => Students.Values.ToList().OrderByDescending(s => s.GetAverage()).Take(n);
+        => Students.Values.ToList().OrderByDescending(s => s.GetAverageOfGrades()).Take(n);
 }
