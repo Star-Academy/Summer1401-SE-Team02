@@ -17,7 +17,9 @@ public class CalculatorTests
         var providerMock = new Mock<IOperatorProvider>();
         providerMock.Setup(p => p.GetOperator(@enum)).Returns(operatorClass);
         var calculator = new Calculator(providerMock.Object);
+        
         var result = calculator.Calculate(firstNum, secondNum, @enum);
+        
         result.Should().Be(expected);
     }
 
