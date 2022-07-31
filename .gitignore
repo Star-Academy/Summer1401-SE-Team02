@@ -15,6 +15,7 @@
       *.sln.docstates
       *.idea
       */obj/
+      */bin/
       # User-specific files (MonoDevelop/Xamarin Studio)
       *.userprefs
       resources/
