@@ -1,6 +1,7 @@
+using SampleLibrary.DataProviding;
 namespace SampleLibrary;
 
-public class Data
+public class Data : IData
 {
     private readonly string _source;
     private readonly string _content;
