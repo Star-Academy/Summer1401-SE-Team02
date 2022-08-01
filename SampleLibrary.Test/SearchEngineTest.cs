@@ -3,6 +3,7 @@ using NSubstitute;
 using SampleLibrary.DataProviding;
 using SampleLibrary.Normalizing;
 using SampleLibrary.Queries;
+using SampleLibrary.Test.model;
 
 namespace SampleLibrary.Test;
 

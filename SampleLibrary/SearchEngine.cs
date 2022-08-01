@@ -56,8 +56,6 @@ public class SearchEngine
         return includingWords.Intersect(positiveWords).Except(negativeWords);
     }
 
-    private IEnumerable<int> GetPostingList(string word)
-    {
-        return (_indexedData.ContainsKey(word) ? _indexedData[word] : new SortedSet<int>());
-    }
+    private IEnumerable<int> GetPostingList(string word) =>
+        (_indexedData.ContainsKey(word) ? _indexedData[word] : new SortedSet<int>());
 }

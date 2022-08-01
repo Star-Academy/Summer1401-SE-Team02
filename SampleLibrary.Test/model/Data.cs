@@ -1,8 +1,8 @@
 using SampleLibrary.DataProviding;
 
-namespace SampleLibrary.Test;
+namespace SampleLibrary.Test.model;
 
-public class Data : IData
+public record Data : IData
 {
     public string _source { get; set; }
     public string _content { get; set; }
