@@ -1,10 +1,10 @@
-using System.Reflection.Metadata.Ecma335;
+using SampleLibrary.Queries;
 
-namespace SampleLibrary.Queries;
+namespace SampleLibrary.Test;
 
 public class SingleWordQuery : IQuery
 {
-    private List<string> _mustIncludingWords;
+    private readonly List<string> _mustIncludingWords;
 
     public SingleWordQuery(string query) => _mustIncludingWords = new List<string>() { query };
 

@@ -1,6 +1,6 @@
-namespace SampleLibrary;
+namespace SampleLibrary.DataProviding;
 
 public interface IDataProvider
 {
-    public IEnumerable<Data> GetAllData();
+    public IEnumerable<IData> GetAllData();
 }

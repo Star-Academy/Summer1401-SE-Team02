@@ -1,3 +1,4 @@
+using SampleLibrary.DataProviding;
 using SampleLibrary.enums;
 using SampleLibrary.Normalizing;
 using SampleLibrary.Queries;
@@ -9,7 +10,7 @@ public class SearchEngine
     private SortedDictionary<string, SortedSet<int>> _indexedData;
     private Dictionary<int, string> _docNames;
     private readonly INormalizer _normalizer;
-    
+
     public SearchEngine(INormalizer normalizer)
     {
         _normalizer = normalizer;
@@ -17,12 +18,7 @@ public class SearchEngine
         _indexedData = new SortedDictionary<string, SortedSet<int>>(StringComparer.OrdinalIgnoreCase);
     }
 
-    public void ImportDataProviderData(IDataProvider dataProvider)
-    {
-        foreach (var data in dataProvider.GetAllData()) IndexData(data);
-    }
-
-    private void IndexData(Data data)
+    public void IndexData(IData data)
     {
         var id = _docNames.Count();
         _docNames.Add(id, data.GetSource());

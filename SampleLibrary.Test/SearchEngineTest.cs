@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NSubstitute;
+using SampleLibrary.DataProviding;
 using SampleLibrary.Normalizing;
 using SampleLibrary.Queries;
 
@@ -7,20 +8,35 @@ namespace SampleLibrary.Test;
 
 public class SearchEngineTest
 {
-    private readonly IDataProvider _dataProvider;
     private readonly SearchEngine _searchEngine;
 
     public SearchEngineTest()
     {
-        _dataProvider = Substitute.For<IDataProvider>();
         _searchEngine = new SearchEngine(new BasicNormalizer());
-        _dataProvider.GetAllData().Returns(new List<Data>()
+        InitSearchEngine(_searchEngine);
+    }
+
+    private void InitSearchEngine(SearchEngine searchEngine)
+    {
+        var fakeData = new List<IData>()
         {
-            new Data("source1", "simple test for search engine"),
-            new Data("source2", "more complex one for better queries, search:)"),
-            new Data("source3", "hello world is enough, believe it!")
-        });
-        _searchEngine.ImportDataProviderData(_dataProvider);
+            new Data()
+            {
+                _source = "source1",
+                _content = "simple test for search engine"
+            },
+            new Data()
+            {
+                _source = "source2",
+                _content = "more complex one for better queries, search:)"
+            },
+            new Data()
+            {
+                _source = "source3",
+                _content = "hello world is enough, believe it!"
+            }
+        };
+        foreach (var data in fakeData) searchEngine.IndexData(data);
     }
 
     #region SingleWordQuery test

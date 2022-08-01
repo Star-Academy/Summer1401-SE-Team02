@@ -12,8 +12,9 @@ public class QueryTest
     [InlineData("new")]
     public void GetMustIncludingWords_SingleWordQuery_ReturnTheListContainingTheInputWord(string singleWord)
     {
+        var expected = new List<string>() { singleWord };
         var result = new SingleWordQuery(singleWord).GetMustIncludingWords();
-        result.Should().Equal(new List<string>() { singleWord });
+        result.Should().Equal(expected);
     }
 
     [Theory]
@@ -43,8 +44,9 @@ public class QueryTest
     [InlineData("longer test for multiple word query")]
     public void GetMustIncludingWords_SingleTypeQuery_ReturnListOfWords(string query)
     {
+        var expected = query.Split().ToList();
         var result = new MultipleWordsQuery(query).GetMustIncludingWords();
-        result.Should().Equal(query.Split().ToList());
+        result.Should().Equal(expected);
     }
 
     [Theory]
@@ -52,8 +54,9 @@ public class QueryTest
     [InlineData("longer -test -for multiple word +query")]
     public void GetMustIncludingWords_MultipleTypeQuery_ReturnListOfMustIncludingWords(string query)
     {
+        var expected = query.Split().ToList().Where(x => !(x.StartsWith("+") || x.StartsWith("-")));
         var result = new MultipleWordsQuery(query).GetMustIncludingWords();
-        result.Should().Equal(query.Split().ToList().Where(x => !(x.StartsWith("+") || x.StartsWith("-"))));
+        result.Should().Equal(expected);
     }
 
     [Fact]
@@ -68,8 +71,9 @@ public class QueryTest
     [InlineData("longer -test -for multiple word +query")]
     public void GetLeastOnceIncludingWords_MultipleTypeQuery_ReturnListOfPositiveWords(string query)
     {
+        var expected = query.Split().ToList().Where(x => x.StartsWith("+")).Select(x => x.Substring(1));
         var result = new MultipleWordsQuery(query).GetLeastOnceIncludingWords();
-        result.Should().Equal(query.Split().ToList().Where(x => x.StartsWith("+")).Select(x => x.Substring(1)));
+        result.Should().Equal(expected);
     }
 
     [Theory]
@@ -77,8 +81,9 @@ public class QueryTest
     [InlineData("+longer +test +for +single +type +query")]
     public void GetLeastOnceIncludingWords_SingleTypeQuery_ReturnListOfAllWords(string query)
     {
+        var expected = query.Split().ToList().Where(x => x.StartsWith("+")).Select(x => x.Substring(1));
         var result = new MultipleWordsQuery(query).GetLeastOnceIncludingWords();
-        result.Should().Equal(query.Split().ToList().Where(x => x.StartsWith("+")).Select(x => x.Substring(1)));
+        result.Should().Equal(expected);
     }
 
 
@@ -94,8 +99,9 @@ public class QueryTest
     [InlineData("longer -test -for multiple word +query")]
     public void GetExcludingWords_MultipleTypeQuery_ReturnListOfNegativeWords(string query)
     {
+        var expected = query.Split().ToList().Where(x => x.StartsWith("-")).Select(x => x.Substring(1));
         var result = new MultipleWordsQuery(query).GetExcludingWords();
-        result.Should().Equal(query.Split().ToList().Where(x => x.StartsWith("-")).Select(x => x.Substring(1)));
+        result.Should().Equal(expected);
     }
 
 
@@ -104,8 +110,9 @@ public class QueryTest
     [InlineData("-longer -test -for -single -type -query")]
     public void GetExcludingWords_SingleTypeQuery_ReturnListOfAllWords(string query)
     {
+        var expected = query.Split().ToList().Select(x => x.Substring(1));
         var result = new MultipleWordsQuery(query).GetExcludingWords();
-        result.Should().Equal(query.Split().ToList().Select(x => x.Substring(1)));
+        result.Should().Equal(expected);
     }
 
     [Fact]
