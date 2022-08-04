@@ -15,8 +15,11 @@
 **/.idea/**/sqlDataSources.xml
 **/.idea/**/dynamic.xml
 .idea/
-.SampleLibrary.Test/depo
+**/.idea
+**/SampleLibrary.Test/depo
+SampleLibrary.Test/depo
 .github
+**/.github
 # Rider
 # Rider auto-generates .iml files, and contentModel.xml
 **/.idea/**/*.iml
