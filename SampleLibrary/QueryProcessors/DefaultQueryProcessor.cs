@@ -1,10 +1,12 @@
+using SampleLibrary.DataProviding;
 using SampleLibrary.Queries;
 
 namespace SampleLibrary.QueryProcessors;
 
 public class DefaultQueryProcessor : IQueryProcessor
 {
-    private ChainQueryHandler _triger; 
+    private readonly ChainQueryHandler _triger;
+
     public DefaultQueryProcessor()
     {
         _triger = new SimpleWordsHandler();
@@ -12,8 +14,9 @@ public class DefaultQueryProcessor : IQueryProcessor
             .SetNext(new PositiveWordsHandler())
             .SetNext(new NegativeWordHandler());
     }
-    public IEnumerable<int> Process(string query, SortedDictionary<string, SortedSet<int>> indexedData, List<int> allDocIds)
+
+    public IEnumerable<int> Process(string query, IIndexedDataRepository indexedData, List<int> currentResult)
     {
-        return _triger.Process(query, indexedData, allDocIds);
+        return _triger.Process(query, indexedData, currentResult);
     }
 }

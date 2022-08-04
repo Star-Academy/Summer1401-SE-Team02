@@ -13,28 +13,19 @@ public class SearchEngineTest
 
     public SearchEngineTest()
     {
-        _searchEngine = new SearchEngine(new BasicNormalizer());
-        InitSearchEngine(_searchEngine);
+        IIndexedDataRepository indexedDataRepository = new InvertedIndexedDataRepository(new BasicNormalizer());
+        InitSearchEngine(indexedDataRepository);
+        _searchEngine = new SearchEngine(indexedDataRepository);
     }
 
-    private void InitSearchEngine(SearchEngine searchEngine)
+    private void InitSearchEngine(IIndexedDataRepository indexedDataRepository)
     {
-        var fakeData1 = Substitute.For<IData>();
-        fakeData1.GetSource().ReturnsForAnyArgs("source1");
-        fakeData1.GetContent().ReturnsForAnyArgs("simple test for search engine");
-        
-        var fakeData2 = Substitute.For<IData>();
-        fakeData2.GetSource().ReturnsForAnyArgs("source2");
-        fakeData2.GetContent().ReturnsForAnyArgs("more complex one for better queries, search:)");
-        
-        
-        var fakeData3 = Substitute.For<IData>();
-        fakeData3.GetSource().Returns("source3");
-        fakeData3.GetContent().Returns("hello world is enough, believe it!");
-        
-        
-        var fakeData = new List<IData>() { fakeData1, fakeData2, fakeData3 };
-        foreach (var data in fakeData) searchEngine.IndexData(data);
+        var fakeData1 = new Data() { Source = "source1", Content = "simple test for search engine" };
+        var fakeData2 = new Data() { Source = "source2", Content = "more complex one for better queries, search:)" };
+        var fakeData3 = new Data() { Source = "source3", Content = "hello world is enough, believe it!" };
+
+        var fakeData = new List<Data>() { fakeData1, fakeData2, fakeData3 };
+        foreach (var data in fakeData) indexedDataRepository.ImportData(data);
     }
 
     #region SingleWordQuery test
@@ -42,10 +33,10 @@ public class SearchEngineTest
     [Fact]
     public void Search_SingleWordQuery_ReturnIncludingSources()
     {
-        var result = _searchEngine.Search(createFakeQuery("simple"));
-        result.Should().Equal(new List<string>() { "source1" });
+        var expected = new List<string>() { "source1" };
+        var result = _searchEngine.Search(CreateFakeQuery("simple"));
+        result.Should().Equal(expected);
     }
-
 
     #endregion
 
@@ -54,22 +45,25 @@ public class SearchEngineTest
     [Fact]
     public void Search_MultipleSimpleWords_ReturnIncludingSources()
     {
-        var result = _searchEngine.Search(createFakeQuery("search engine"));
-        result.Should().Equal(new List<string>() { "source1" });
+        var expected = new List<string>() { "source1" };
+        var result = _searchEngine.Search(CreateFakeQuery("search engine"));
+        result.Should().Equal(expected);
     }
 
     [Fact]
     public void Search_MultiplePositiveWords_ReturnSourcesIncludingAtLeastOneOfThem()
     {
-        var result = _searchEngine.Search(createFakeQuery("+search +complex"));
-        result.Should().Equal(new List<string>() { "source1", "source2" });
+        var expected = new List<string>() { "source1", "source2" };
+        var result = _searchEngine.Search(CreateFakeQuery("+search +complex"));
+        result.Should().Equal(expected);
     }
 
     [Fact]
     public void Search_MultipleNegativeWords_ReturnNonContainingSources()
     {
-        var result = _searchEngine.Search(createFakeQuery("-better -believe"));
-        result.Should().Equal(new List<string>() { "source1" });
+        var expected = new List<string>() { "source1" };
+        var result = _searchEngine.Search(CreateFakeQuery("-better -believe"));
+        result.Should().Equal(expected);
     }
 
     [Theory]
@@ -78,7 +72,7 @@ public class SearchEngineTest
     public void Search_MultipleWordsWithUpperOrLowercaseCharacters_ReturnIncludingSources(string query,
         List<String> expected)
     {
-        var result = _searchEngine.Search(createFakeQuery(query));
+        var result = _searchEngine.Search(CreateFakeQuery(query));
         result.Should().Equal(expected);
     }
 
@@ -101,8 +95,8 @@ public class SearchEngineTest
         };
 
     #endregion
-    
-    private IQuery createFakeQuery(string query)
+
+    private static IQuery CreateFakeQuery(string query)
     {
         var fakeQuery = Substitute.For<IQuery>();
         fakeQuery.GetContent().Returns(query);

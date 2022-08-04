@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using SampleLibrary.DataProviding;
 using SampleLibrary.Queries;
 
 namespace SampleLibrary.QueryProcessors;
@@ -7,8 +8,8 @@ public abstract class ChainQueryHandler : IQueryProcessor
 {
     protected ChainQueryHandler? Next;
 
-    public abstract IEnumerable<int> Process(string query, SortedDictionary<string, SortedSet<int>> indexedData,
-        List<int> allDocIds);
+    public abstract IEnumerable<int> Process(string query, IIndexedDataRepository indexedData,
+        List<int> currentResult);
 
     public ChainQueryHandler SetNext(ChainQueryHandler next)
     {
