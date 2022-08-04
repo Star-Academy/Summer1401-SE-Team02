@@ -20,6 +20,7 @@
 SampleLibrary.Test/depo
 .github
 **/.github
+.git*
 # Rider
 # Rider auto-generates .iml files, and contentModel.xml
 **/.idea/**/*.iml
