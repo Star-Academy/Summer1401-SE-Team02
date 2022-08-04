@@ -1,12 +1,12 @@
-using SampleLibrary.DataProviding;
-
-namespace SampleLibrary.Test.model;
-
-public record Data : IData
-{
-    public string _source { get; set; }
-    public string _content { get; set; }
-
-    public string GetSource() => _source;
-    public string GetContent() => _content;
-}
+// using SampleLibrary.DataProviding;
+//
+// namespace SampleLibrary.Test.model;
+//
+// public record Data : IData
+// {
+//     public string Source { get; set; }
+//     public string Content { get; set; }
+//
+//     public string GetSource() => Source;
+//     public string GetContent() => Content;
+// }
