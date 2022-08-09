@@ -21,7 +21,7 @@ public class SearchEngine
         _indexedDataRepository = indexedDataRepository;
     }
 
-    public IEnumerable<string> Search(IQuery query) =>
-        _indexedDataRepository.MatchSourcesWithIds(_queryProcessor.Process(query.GetContent(), _indexedDataRepository,
+    public IEnumerable<string> Search(Query query) =>
+        _indexedDataRepository.MatchSourcesWithIds(_queryProcessor.Process(query.Content, _indexedDataRepository,
             _indexedDataRepository.GetAllDocIds().ToList()));
 }

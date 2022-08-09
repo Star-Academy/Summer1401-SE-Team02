@@ -13,8 +13,7 @@ public abstract class ChainQueryHandler : IQueryProcessor
 
     public ChainQueryHandler SetNext(ChainQueryHandler next)
     {
-        Next = next;
-        return next;
+        return Next = next;
     }
 
     protected List<string> ExtractMatchedWords(string text, string pattern)

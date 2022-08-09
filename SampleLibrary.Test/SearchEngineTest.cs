@@ -34,7 +34,7 @@ public class SearchEngineTest
     public void Search_SingleWordQuery_ReturnIncludingSources()
     {
         var expected = new List<string>() { "source1" };
-        var result = _searchEngine.Search(CreateFakeQuery("simple"));
+        var result = _searchEngine.Search(new Query(){Content = "simple"});
         result.Should().Equal(expected);
     }
 
@@ -46,7 +46,7 @@ public class SearchEngineTest
     public void Search_MultipleSimpleWords_ReturnIncludingSources()
     {
         var expected = new List<string>() { "source1" };
-        var result = _searchEngine.Search(CreateFakeQuery("search engine"));
+        var result = _searchEngine.Search(new Query(){Content = "search engine"});
         result.Should().Equal(expected);
     }
 
@@ -54,7 +54,7 @@ public class SearchEngineTest
     public void Search_MultiplePositiveWords_ReturnSourcesIncludingAtLeastOneOfThem()
     {
         var expected = new List<string>() { "source1", "source2" };
-        var result = _searchEngine.Search(CreateFakeQuery("+search +complex"));
+        var result = _searchEngine.Search(new Query(){Content = "+search +complex"});
         result.Should().Equal(expected);
     }
 
@@ -62,7 +62,7 @@ public class SearchEngineTest
     public void Search_MultipleNegativeWords_ReturnNonContainingSources()
     {
         var expected = new List<string>() { "source1" };
-        var result = _searchEngine.Search(CreateFakeQuery("-better -believe"));
+        var result = _searchEngine.Search(new Query(){Content = "-better -believe"});
         result.Should().Equal(expected);
     }
 
@@ -72,7 +72,7 @@ public class SearchEngineTest
     public void Search_MultipleWordsWithUpperOrLowercaseCharacters_ReturnIncludingSources(string query,
         List<String> expected)
     {
-        var result = _searchEngine.Search(CreateFakeQuery(query));
+        var result = _searchEngine.Search(new Query(){Content = query});
         result.Should().Equal(expected);
     }
 
