@@ -96,10 +96,4 @@ public class SearchEngineTest
 
     #endregion
 
-    private static IQuery CreateFakeQuery(string query)
-    {
-        var fakeQuery = Substitute.For<IQuery>();
-        fakeQuery.GetContent().Returns(query);
-        return fakeQuery;
-    }
 }
