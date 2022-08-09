@@ -7,7 +7,6 @@ static class Program
 {
     public static void Main(string[] args)
     {
-        // INormalizer normalizer = new BasicNormalizer();
         IIndexedDataRepository dataRepository = new InvertedIndexedDataRepository();
         SearchEngine searchEngine = new SearchEngine(dataRepository);
         IInterface consoleInterface = new ConsoleInterface();
