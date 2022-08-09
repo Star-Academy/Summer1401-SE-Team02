@@ -1,6 +1,7 @@
 ﻿using SampleLibrary;
 using SampleLibrary.DataProviding;
 using SampleLibrary.Queries;
+using searchEngineApp.UserInterface;
 
 static class Program
 {
@@ -8,10 +9,17 @@ static class Program
     {
         // INormalizer normalizer = new BasicNormalizer();
         IIndexedDataRepository dataRepository = new InvertedIndexedDataRepository();
-        ImportDataToRepository(dataRepository);
         SearchEngine searchEngine = new SearchEngine(dataRepository);
-        var result = searchEngine.Search(new Query(){Content = Console.ReadLine()!});
-        Console.WriteLine(string.Join(", ", result));
+        IInterface consoleInterface = new ConsoleInterface();
+        ImportDataToRepository(dataRepository);
+
+        
+        var query = string.Empty;
+        while ((query = consoleInterface.GetSearchText()) != "-1")
+        {
+            var result = searchEngine.Search(new Query(){Content = query});
+            consoleInterface.ShowSearchResult(result);
+        }
     }
     
     
