@@ -14,7 +14,6 @@ public class SearchEngine
         _queryProcessor = queryProcessor;
         _indexedDataRepository = indexedDataRepository;
     }
-    
 
     public SearchEngine(IIndexedDataRepository indexedDataRepository)
     {
