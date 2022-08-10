@@ -1,6 +1,6 @@
-namespace app.model;
+namespace app.model.entities;
 
-public record struct Grade
+public record Grade
 {
     public string Lesson { get; set; }
     public double Score { get; set; }

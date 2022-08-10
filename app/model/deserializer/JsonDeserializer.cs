@@ -4,5 +4,8 @@ namespace app.model.Deserializer;
 
 public class JsonDeserializer : IDeserializer
 {
-    public T Deserialize<T>(string text) => JsonSerializer.Deserialize<T>(text);
+    public T Deserialize<T>(string text)
+    {
+        return JsonSerializer.Deserialize<T>(text);
+    }
 }

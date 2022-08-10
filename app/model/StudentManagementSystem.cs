@@ -1,24 +1,30 @@
+using app.model.database;
+using app.model.entities;
+
 namespace app.model;
 
 public class StudentManagementSystem
 {
-    private Dictionary<int, Student> Students { get; set; }
-
-    public StudentManagementSystem()
-    {
-        this.Students = new Dictionary<int, Student>();
-    }
+    public IDatabase Database { init; get; }
 
     public void RegisterStudents(List<Student> students)
     {
-        Students = students.ToDictionary(x => x.StudentNumber, x => x);
+        Database.AddStudents(students);
     }
 
     public void ImportGrades(List<Grade> grades)
     {
-        foreach (Grade grade in grades) Students[grade.StudentNumber].RegisterGrade(grade);
+        Database.AddGrades(grades);
     }
 
-    public IEnumerable<Student> GetNTopStudents(int n)
-        => Students.Values.ToList().OrderByDescending(s => s.GetAverageOfGrades()).Take(n);
+    public IEnumerable<string> GetNTopStudents(int n)
+    {
+        return Database.GetStudents().ToList().GroupJoin(Database.GetGrades(), s => s.StudentNumber,
+            g => g.StudentNumber,
+            (student, grades) => new
+            {
+                Average = grades.Select(g => g.Score).Average(),
+                PersonalData = $"{student.StudentNumber} | {student.FirstName} {student.LastName}"
+            }).OrderByDescending(p => p.Average).Select(p => $"{p.PersonalData} : {Math.Round(p.Average, 2)}").Take(n);
+    }
 }

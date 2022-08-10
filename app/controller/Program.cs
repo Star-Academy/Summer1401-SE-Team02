@@ -1,6 +1,8 @@
 using app.model;
-using app.model.DataProvider;
+using app.model.database;
 using app.model.Deserializer;
+using app.model.entities;
+using app.model.rawDataProvider;
 using app.view;
 
 namespace app.controller;
@@ -9,19 +11,22 @@ public class Program
 {
     public void Start()
     {
-        var fileReader = new FileReader();
-        var studentManagementSystem = new StudentManagementSystem();
+        var database = new PostgresqlDatabase();
+        var studentManagementSystem = new StudentManagementSystem { Database = database };
         var deserializer = new JsonDeserializer();
         var dataProvider = new WebDataProvider();
-        var userInterface = new UserInterface();
+        var userInterface = new ConsoleInterface();
 
         var students =
             deserializer.Deserialize<List<Student>>(dataProvider.GetData(Constants.StudentsFileLink));
         var grades = deserializer.Deserialize<List<Grade>>(dataProvider.GetData(Constants.GradesFileLink));
 
-        studentManagementSystem.RegisterStudents(students);
-        studentManagementSystem.ImportGrades(grades);
+        if (database.isEmpty())
+        {
+            studentManagementSystem.RegisterStudents(students);
+            studentManagementSystem.ImportGrades(grades);
+        }
 
-        userInterface.ShowList(studentManagementSystem.GetNTopStudents(3));
+        userInterface.ShowList<string>(studentManagementSystem.GetNTopStudents(3));
     }
 }
