@@ -6,4 +6,5 @@ namespace SampleLibrary;
 public interface ISearchEngine
 {
     public IEnumerable<string> Search(Query qyQuery);
+    public void ImportData(Data data);
 }
