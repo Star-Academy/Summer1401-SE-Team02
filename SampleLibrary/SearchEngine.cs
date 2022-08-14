@@ -4,7 +4,7 @@ using SampleLibrary.QueryProcessors;
 
 namespace SampleLibrary;
 
-public class SearchEngine
+public class SearchEngine : ISearchEngine
 {
     private readonly IQueryProcessor _queryProcessor;
     private readonly IIndexedDataRepository _indexedDataRepository;
@@ -24,4 +24,5 @@ public class SearchEngine
     public IEnumerable<string> Search(Query query) =>
         _indexedDataRepository.MatchSourcesWithIds(_queryProcessor.Process(query.Content, _indexedDataRepository,
             _indexedDataRepository.GetAllDocIds().ToList()));
+    
 }
