@@ -38,7 +38,7 @@ public class SchoolContext : DbContext, IDatabase
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql(
-            "Host=localhost;Database=databaseNew;Username=postgres;Password=pass");
+            $"Host={Config.Host};Database={Config.Database};Username={Config.Username};Password={Config.Password}");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
