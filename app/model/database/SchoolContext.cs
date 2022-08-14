@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace app.model.database;
 
-public class PostgresqlDatabase : DbContext, IDatabase
+public class SchoolContext : DbContext, IDatabase
 {
     public DbSet<Student> Students { get; set; }
-    public DbSet<Grade> Grades { get; set; }
+    public DbSet<Grade> AllGrades { get; set; }
 
     public void AddStudents(List<Student> students)
     {
@@ -27,18 +27,18 @@ public class PostgresqlDatabase : DbContext, IDatabase
 
     public IEnumerable<Grade> GetGrades()
     {
-        return Grades;
+        return AllGrades;
     }
 
     public bool isEmpty()
     {
-        return !(Students.Any() || Grades.Any());
+        return !(Students.Any() || AllGrades.Any());
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql(
-            "Host=localhost;Database=school;Username=postgres;Password=mynewpassword");
+            "Host=localhost;Database=databaseNew;Username=postgres;Password=pass");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

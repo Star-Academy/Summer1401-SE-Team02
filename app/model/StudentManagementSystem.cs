@@ -19,12 +19,10 @@ public class StudentManagementSystem
 
     public IEnumerable<string> GetNTopStudents(int n)
     {
-        return Database.GetStudents().ToList().GroupJoin(Database.GetGrades(), s => s.StudentNumber,
-            g => g.StudentNumber,
-            (student, grades) => new
-            {
-                Average = grades.Select(g => g.Score).Average(),
-                PersonalData = $"{student.StudentNumber} | {student.FirstName} {student.LastName}"
-            }).OrderByDescending(p => p.Average).Select(p => $"{p.PersonalData} : {Math.Round(p.Average, 2)}").Take(n);
+        return Database.GetStudents().OrderByDescending(s =>
+                Database.GetGrades().Where(g => g.StudentNumber == s.StudentNumber).Select(g => g.Score).Average())
+            .Take(n)
+            .Select(s =>
+                $"{s.StudentNumber} | {s.FirstName} {s.LastName}: {Database.GetGrades().Where(g => g.StudentNumber == s.StudentNumber).Select(g => g.Score).Average()}");
     }
 }

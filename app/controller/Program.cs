@@ -11,19 +11,22 @@ public class Program
 {
     public void Start()
     {
-        var database = new PostgresqlDatabase();
+        var database = new SchoolContext();
         var studentManagementSystem = new StudentManagementSystem { Database = database };
-        var deserializer = new JsonDeserializer();
-        var dataProvider = new WebDataProvider();
-        var userInterface = new ConsoleInterface();
 
-        var students =
-            deserializer.Deserialize<List<Student>>(dataProvider.GetData(Constants.StudentsFileLink));
-        var grades = deserializer.Deserialize<List<Grade>>(dataProvider.GetData(Constants.GradesFileLink));
+        var userInterface = new ConsoleInterface();
 
         if (database.isEmpty())
         {
-            studentManagementSystem.RegisterStudents(students);
+            var deserializer = new JsonDeserializer();
+            var dataProvider = new WebDataProvider();
+            var students =
+                deserializer.Deserialize<List<Student>>(dataProvider.GetData(Constants.StudentsFileLink)).ToDictionary(s => s.StudentNumber);
+            var grades = deserializer.Deserialize<List<Grade>>(dataProvider.GetData(Constants.GradesFileLink));
+
+            foreach (var g in grades) students[g.StudentNumber].Grades.Add(g);
+                
+            studentManagementSystem.RegisterStudents(students.Values.ToList());
             studentManagementSystem.ImportGrades(grades);
         }
 

@@ -10,9 +10,9 @@ using app.model.database;
 
 namespace app.Migrations
 {
-    [DbContext(typeof(PostgresqlDatabase))]
-    [Migration("20220810065350_school")]
-    partial class school
+    [DbContext(typeof(SchoolContext))]
+    [Migration("20220814034426_database")]
+    partial class database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,16 +26,18 @@ namespace app.Migrations
 
             modelBuilder.Entity("app.model.entities.Grade", b =>
                 {
+                    b.Property<int>("StudentNumber")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Lesson")
                         .HasColumnType("text");
 
                     b.Property<double>("Score")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("StudentNumber")
-                        .HasColumnType("integer");
+                    b.HasKey("StudentNumber", "Lesson");
 
-                    b.ToTable("Grades");
+                    b.ToTable("AllGrades");
                 });
 
             modelBuilder.Entity("app.model.entities.Student", b =>
@@ -45,9 +47,6 @@ namespace app.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("StudentNumber"));
-
-                    b.Property<float>("Average")
-                        .HasColumnType("real");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("text");

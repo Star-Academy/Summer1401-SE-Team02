@@ -6,21 +6,22 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace app.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class database : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Grades",
+                name: "AllGrades",
                 columns: table => new
                 {
-                    Lesson = table.Column<string>(type: "text", nullable: true),
-                    Score = table.Column<double>(type: "double precision", nullable: false),
-                    StudentNumber = table.Column<int>(type: "integer", nullable: false)
+                    Lesson = table.Column<string>(type: "text", nullable: false),
+                    StudentNumber = table.Column<int>(type: "integer", nullable: false),
+                    Score = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_AllGrades", x => new { x.StudentNumber, x.Lesson });
                 });
 
             migrationBuilder.CreateTable(
@@ -29,7 +30,6 @@ namespace app.Migrations
                 {
                     StudentNumber = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Average = table.Column<float>(type: "real", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true)
                 },
@@ -43,7 +43,7 @@ namespace app.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Grades");
+                name: "AllGrades");
 
             migrationBuilder.DropTable(
                 name: "Students");
