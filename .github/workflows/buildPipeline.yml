@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "TDD" ]
+    branches: [ "phase#5-TDD-search-engine-classlib" ]
   pull_request:
-    branches: [ "TDD" ]
+    branches: [ "phase#5-TDD-search-engine-classlib" ]
 
 jobs:
   build:
