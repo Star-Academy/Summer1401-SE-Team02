@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using SampleLibrary;
 using SampleLibrary.DataProviding;
@@ -16,23 +15,13 @@ public class SearchController : ControllerBase
     {
         _searchEngine = searchEngine;
     }
-    
+
     [HttpGet]
-    public IEnumerable<string> Get(string query)
-    {
-        var q = new Query() { Content = query };
-        Console.WriteLine($"getting: {query}  >> result:{_searchEngine.Search(q).ToList()}");
-        return _searchEngine.Search(q);
-    }
-    
-    [HttpPost]
+    public IEnumerable<string> Get(string query) => _searchEngine.Search(new Query { Content = query });
+
+        [HttpPost]
     public void AddContent(string source, string content)
     {
-        _searchEngine.ImportData(new Data(){Source = source, Content = content});
+        _searchEngine.ImportData(new Data { Source = source, Content = content });
     }
-
-
-
-
-    
 }
