@@ -17,11 +17,14 @@ public class SearchController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<string> Get(string query) => _searchEngine.Search(new Query { Content = query });
-
-        [HttpPost]
-    public void AddContent(string source, string content)
+    public IEnumerable<string> Search(string query)
     {
-        _searchEngine.ImportData(new Data { Source = source, Content = content });
+        return _searchEngine.Search(new Query { Content = query });
+    }
+
+    [HttpPost]
+    public void AddContent(Data data)
+    {
+        _searchEngine.ImportData(data);
     }
 }
